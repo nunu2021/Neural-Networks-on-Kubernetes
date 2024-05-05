@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: free-service-job-
+  namespace: free-service
+spec:
+  template:
+    spec:
+      restartPolicy: Never  # Add the restartPolicy field here
+      containers:
+        - name: free-container-name
+          image: public.ecr.aws/w2m8w3c3/mp12-classifier1:latest
+          env:
+          - name: DATASET
+            value: mnist
+          - name: TYPE
+            value: ff
+          resources:
+            limits:
+              cpu: "0.9"

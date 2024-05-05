@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  namespace: default
+  generateName: premium-tier-job-
+spec:
+  template:
+    metadata:
+      generateName: premium-tier-job-
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: my-container
+        image: public.ecr.aws/w2m8w3c3/mp12-classifier1:latest
+        env:
+        - name: DATASET
+          value: kmnist
+        - name: TYPE
+          value: cnn
+        resources:
+          limits:
+            cpu: "0.9"
